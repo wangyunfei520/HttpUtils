@@ -1,0 +1,55 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+    defaultConfig {
+        applicationId "cn.wyf.httptest"
+        minSdkVersion 16
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        // tray contentProvider鉴权
+        // add this to set a unique tray authority based on your applicationId
+        resValue "string", "tray__authority", "${applicationId}.tray"
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("String", "hostUrl", "\"https://posp.gsbankchina.com:1234/\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("String", "hostUrl", "\"https://124.152.62.181:11234/\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(path: ':mylibrary')
+    implementation files('libs\\usc.jar')
+}
