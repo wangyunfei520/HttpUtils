@@ -58,4 +58,17 @@ public class RequestHelper {
         });
     }
 
+    public Observable<String> requestTest(String url, String data) {
+        XLogger.printJson(data);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=utf-8"), data);
+        return requestAPI.requesttest(url, requestBody).map(new Function<String, String>() {
+            @Override
+            public String apply(String s) throws Exception {
+                XLogger.printJson(s);
+                return "";
+            }
+        });
+    }
+
+
 }

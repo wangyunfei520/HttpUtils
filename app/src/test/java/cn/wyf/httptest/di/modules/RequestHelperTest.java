@@ -3,9 +3,12 @@ package cn.wyf.httptest.di.modules;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
 import org.junit.Test;
 
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import cn.wyf.httptest.di.bean.BaseBean;
@@ -16,6 +19,36 @@ import cn.wyf.httptest.di.bean.Trade;
 
 
 public class RequestHelperTest {
+
+
+    @Test
+    public void Test(){
+        String te = "TransId=TJSK|MerchantId=95162010763P058|MerTransDateTime=20210716143755|OrderId=202107161437540000|MerTransDate=20210716|TransAmount=0.01|RespCode=000000|RespMsg=交易成功|ChannelId=05|TransSeqNo=T2021071601978403|merSettAMT=|disCountAmt=0.00|activType=|activChannel=2|activInfo=|TransStatus=S|merAbbrName=大强百合|SignType=RSA|";
+        backJjiexi(te);
+
+        try {
+            String ake1997IHEAT2016 = AESCrypt.encrypt_ECB_MODE("AKE1997IHEAT2016", "{\"code\":\"1010577\",\"heatPeroid\":\"2019\"}");
+            System.out.println(ake1997IHEAT2016);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void backJjiexi(String te) {
+        String[] strings = te.split("\\|");
+        HashMap<String,String> params = new HashMap<>();
+        for (String s:strings
+             ) {
+            String[] datas =  s.split("=");
+            if (datas.length ==1){
+                params.put(datas[0],"");
+            }else {
+                params.put(datas[0],datas[1]);
+            }
+        }
+        String s = new Gson().toJson(params);
+        System.out.println(s);
+    }
 
     @Test
     public void TestJiexi(){

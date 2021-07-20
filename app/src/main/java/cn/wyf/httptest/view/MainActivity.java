@@ -29,7 +29,8 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.testButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testHttp();
+//                testHttp();
+                testHttp2();
 //                testSpeak();
             }
         });
@@ -37,6 +38,33 @@ public class MainActivity extends BaseActivity {
 
     private void testSpeak() {
         SpeekUtilOffline.getInstance().speek("支付宝交易成功" + MoneyUtil.toChinese("0.01"));
+    }
+
+    private void testHttp2(){
+        addSubscription(RequestHelper.getInstance().requestTest(
+                "http://39.98.84.149:8200/third-party-transaction/originalUndoData/selectCardBalance?sign=7d30744d482df0004ffea721cac96bd7ff9d57d6&requestTime=1600219935",
+                "{\"track\":\"6100024106614751=000000101010000842\",\"stationCode\":\"4A5FC7CDEA20D5C85C65CEDAAFC3360B\"}"),
+                new ApiCallback<String>() {
+                    @Override
+                    public void onHandleSuccess(String response) {
+
+                    }
+
+                    @Override
+                    public void onHandleFailure(String msg) {
+
+                    }
+
+                    @Override
+                    public void onHandleFinish() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+                });
     }
 
     private void testHttp() {
