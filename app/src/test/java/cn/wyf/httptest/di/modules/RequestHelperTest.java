@@ -28,7 +28,10 @@ public class RequestHelperTest {
 
         try {
             String ake1997IHEAT2016 = AESCrypt.encrypt_ECB_MODE("AKE1997IHEAT2016", "{\"code\":\"1010577\",\"heatPeroid\":\"2019\"}");
+            System.out.println(ake1997IHEAT2016+"\n");
+            ake1997IHEAT2016 = AESCrypt.encrypt_hex_ECB_MODE("AKE1997IHEAT2016", "{\"code\":\"1010577\",\"heatPeroid\":\"2019\"}");
             System.out.println(ake1997IHEAT2016);
+            System.out.println("ECDED40ED572C5169C08B12344B87C488E4CFCCACC3436C55DF9E30E870AA8BFAD824400B370B712291291562CF823BE");
         } catch (GeneralSecurityException e) {
             e.printStackTrace();
         }
