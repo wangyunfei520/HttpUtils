@@ -9,6 +9,8 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import cn.wyf.httptest.util.ByteUtils;
+
 /**
  * AES加解密工具类
  */

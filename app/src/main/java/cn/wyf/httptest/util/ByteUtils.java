@@ -1,4 +1,4 @@
-package cn.wyf.httptest.di.modules;
+package cn.wyf.httptest.util;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
